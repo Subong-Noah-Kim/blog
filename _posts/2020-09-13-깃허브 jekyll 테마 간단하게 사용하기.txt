@@ -1,0 +1,117 @@
+
+
+
+> Written with [StackEdit](https://stackedit.io/).
+
+
+
+# GitHub Blog 만들기 (아주 간단하게만..)
+
+## 개요
+데이터 분석이라는 분야는 빠르고 추상적으로 발전해왔다.  
+많은 학문은 교과서를 가지고 있지만, 빠르게 발전 중인 분야에선 실무경험, 최신 논문 등 교과서 외의 것을 공부하는 것이 중요한 경우가 많다.
+
+관련된 학위나 자격증으로 능력을 보여줄 수 있으면 좋지만, 이 분야에선 쉽지 않다. 최근 많은 기업에서 채용 시에 포트폴리오를 요구한다. 이 포트폴리오를 PPT, Keynote로 예쁘게 만들 수 있지만, 더 좋은 방법은 포트폴리오가 될 수 있는 블로그를 운영하는 것이다.
+
+개발 관련 분야에서 블로그 운영으로 가장 유명한 플랫폼은 GitHub이다.
+필자는 티스토리 블로그, 노션, 깃허브 일반 레포 등에서 학습한 내용들을 작성해 왔지만 앞으로는 공부, 경험하게될 것들을 정리하기 위해 우선 GitHub에 블로그 기능을 활성화 하고자 한다.
+
+## 간단한 개념
+1. GitHub
+2. Jekyll & Jekyll remote theme
+
+
+### GitHub
+
+> **GitHub is how people build software.** We’re supporting a community
+> where more than 50 million* people learn, share, and work together to
+> build software.
+
+공식 홈페이지에 따르면 깃허브는 소프트웨어를 만들기 위해 배우고, 공유하고, 함께 일하는 커뮤니티이다.
+
+### Jekyll & Jekyll Remote Theme
+
+> Jekyll is a blog-aware, static site generator in Ruby.
+
+Jekyll은 Ruby를 활용해 정적 웹사이트를 만들 수 있는 툴이며, 깃허브에서 개발한 툴이라고 한다. 블로그 운영에는 Ruby를 몰라도 상관 없다.
+
+참고) https://chogyujin.github.io/2019/04/20/jekyll%EC%9D%B4%EB%9E%80-Jekyll%EC%9A%94%EC%95%BD-%EC%A0%95%EB%A6%AC/
+
+<br>
+
+
+> Jekyll plugin for building Jekyll sites with any public GitHub-hosted theme
+
+공개된 jekyll theme을 활용해 설치 없이 손쉽게 좋은 퀄리티의 템플릿을 사용자의 깃허브에 적용할 수 있다.
+
+**jekyll remote theme**을 사용하는데 크게 3개의 방법이 있지만, 여기서는 `_config.yml` 파일을 활용한 방법을 사용했다.
+
+참고) https://github.com/benbalter/jekyll-remote-theme
+
+
+
+
+
+## jekyll remote theme 적용
+
+참고) https://dreamgonfly.github.io/blog/jekyll-remote-theme/
+
+> 블로그 생성 및 본 포스트 작성에는 위 블로그의 도움을 크게 받았으며, 추후 기억하기 위해 실행했던 내용을 따라 포스팅하는 것입니다. 위 블로그에서 더욱 자세한 설명을 확인할 수 있습니다.
+
+
+#### 1. 새 저장소(repository) 만들기
+ - 깃허브에서 계정 생성 후 원격저장소 만들기(yourname/blog)
+- `Settings-Options` 에서 `GitHub Pages` source 부분의 branch를 지정해 호스팅 기능을 사용하도록 설정
+#### 2. 원하는 Jekyll 테마 찾기
+-  [jekyll-theme](https://github.com/topics/jekyll-theme)에 접속하여 원하는 Jekyll 테마 찾기
+#### 3. `_config.yml` 파일 생성
+ - 위에서 찾은 테마의 깃허브 repository에서 `_config.yml` 파일 확인
+ - `Raw`버튼을 눌러 스크립트 확인 후 블로그를 적용할 나의 깃허브 페이지에 `_config.yml`파일 생성 및 붙여넣기
+- 상단에 테마 적용을 위한 기본 설정 변경
+
+	```yaml
+	#remote_theme : mmistakes/minimal-mistakes
+	```
+	위의 주석처리 되어있는 `#`을 삭제
+	```yaml
+	remote_theme : mmistakes/minimal-mistakes
+	```
+	<br>
+
+	```yaml
+	url : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+	baseurl : # the subpath of your site, e.g. "/blog"
+	```
+	위에서 url에 호스팅할 웹페이지 주소를 작성 
+
+	```yaml
+	url : "https://yourname.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+	baseurl : # the subpath of your site, e.g. "/blog"
+	```
+
+이 외에 블로그 타이틀, 작성자 정보 등을 본 파일 내에서 작성 가능하니 참고
+
+
+#### 4. `index.html` (+$\alpha$) 파일 생성
+Jekyll이 사이트를 생성할 때 가장 처음 보여주는 페이지를 가져온다. `index.html` 외에 다른 이름으로 되어있을 수 있고, 추가 파일이 필요할 수 있으니 각 테마의 주의사항을 참고
+
+
+#### 5. `_posts` 폴더에 새 글 작성하기
+- 깃허브 저장소에서 `Create new file` 버튼 클릭 후 새 파일 생성하기
+- `_posts/2020-09-13-filename.확장자`  형태로 파일명을 지정하여 게시물 생성 (스펠링과 입력 형식을 꼭 맞춰줘야 함)
+- 테마별로 기본 형태에 따라 메타데이터인  Front matter 작성
+	```yaml
+	---
+	title : "제목을 입력해주세요."
+	date : 2020-09-13 18:19:00
+	categories : jekyll update
+	---
+	```
+
+#### 6. `yourname.github.io` 에서 반영여부 확인하기
+
+ - https://yourname.github.io/blog 링크를 통해 페이지 생성 확인 (갱신에 일정 시간이 소요될 수 있음)
+
+
+
+
